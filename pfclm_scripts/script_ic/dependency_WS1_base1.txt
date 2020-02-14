@@ -1,0 +1,27 @@
+#!/bin/bash
+JOB1=$(sbatch PFCLM-Slurm_WS1_base1_i.sbatch| rev | cut -d ' ' -f 1 | rev) #Get me the last space-separated element
+
+if ! [ "z$JOB1" == "z" ] ; then
+  echo "First job submitted as jobid $JOB1"
+  JOB2=$(sbatch --dependency=afterany:$JOB1 PFCLM-Slurm_WS1_base1_c.sbatch| rev | cut -d ' ' -f 1 | rev)
+
+  if ! [ "z$JOB2" == "z" ] ; then
+  echo "Second job submitted as jobid $JOB2, following $JOB1"
+  JOB3=$(sbatch --dependency=afterany:$JOB2 PFCLM-Slurm_WS1_base1_c.sbatch| rev | cut -d ' ' -f 1 | rev)
+
+  if ! [ "z$JOB3" == "z" ] ; then
+  echo "Second job submitted as jobid $JOB3, following $JOB2"
+  JOB4=$(sbatch --dependency=afterany:$JOB3 PFCLM-Slurm_WS1_base1_c.sbatch| rev | cut -d ' ' -f 1 | rev)
+
+  if ! [ "z$JOB4" == "z" ] ; then
+  echo "Second job submitted as jobid $JOB4, following $JOB3"
+  JOB5=$(sbatch --dependency=afterany:$JOB4 PFCLM-Slurm_WS1_base1_c.sbatch| rev | cut -d ' ' -f 1 | rev)
+
+  if ! [ "z$JOB5" == "z" ] ; then
+  echo "Third job submitted as jobid $JOB5, following after every element of $JOB4"
+
+  fi
+  fi
+  fi
+ fi
+fi

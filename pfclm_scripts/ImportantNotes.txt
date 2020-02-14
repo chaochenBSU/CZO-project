@@ -1,0 +1,8 @@
+# some important notes from the running
+About the continuse running:
+1. clm output frequency can be set up in order to contunisely running the failed/stopped the simulation.
+2. However, a lot of times it is not necessary or too mig to export clm continuse output put everystep, but instead clm will just collect related information at the stop time step. Thus the modeler would be only to restart the run form that time step.
+3. when resrart, remember to change the clm inout file.
+4. the step at which last pressure output file, is the step clm collect the information; always check the *rst" in the output folder to make sure the last time 0step clm collected the information.
+5. the automatic time step pick-up scripts, which end up with "_c" should be fine with the restart running, as long as the last times of output file in the output folder is where you want to restart.  
+
